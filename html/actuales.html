@@ -30,7 +30,7 @@
 
             <div class="grid-productos" id="grid-camisetas">
                 
-                <!-- Real Madrid -->
+              
                 <div class="card tarjeta-camisa" data-equipo="real madrid espana">
                     <!-- ENLACE A LA PÁGINA DE PRODUCTO -->
                     <a href="producto.html?nombre=Camiseta%20Real%20Madrid&precio=89.99&img=camisa-real-madrid.jpg" style="text-decoration: none; color: inherit;">
@@ -40,12 +40,12 @@
                         </div>
                         <h4>Camiseta Real Madrid</h4>
                     </a>
-                    <!-- FIN DEL ENLACE -->
+                
                     <p class="precio">$89.99 USD</p>
                     <button class="btn-card" onclick="agregarAlCarrito('Camiseta Real Madrid', 89.99, '../img/camisa-real-madrid.jpg')">Añadir rápido</button>
                 </div>
 
-                <!-- Barcelona -->
+         
                 <div class="card tarjeta-camisa" data-equipo="barcelona barca espana">
                     <a href="producto.html?nombre=Camiseta%20FC%20Barcelona&precio=89.99&img=camisa-barcelona.jpg" style="text-decoration: none; color: inherit;">
                         <div class="img-container">
@@ -57,7 +57,7 @@
                     <button class="btn-card" onclick="agregarAlCarrito('Camiseta FC Barcelona', 89.99, '../img/camisa-barcelona.jpg')">Añadir rápido</button>
                 </div>
 
-                <!-- Bayern -->
+          
                 <div class="card tarjeta-camisa" data-equipo="bayern munchen alemania">
                     <a href="producto.html?nombre=Camiseta%20Bayern%20München&precio=84.99&img=camisa-bayern.jpg" style="text-decoration: none; color: inherit;">
                         <div class="img-container">
@@ -69,7 +69,7 @@
                     <button class="btn-card" onclick="agregarAlCarrito('Camiseta Bayern München', 84.99, '../img/camisa-bayern.jpg')">Añadir rápido</button>
                 </div>
 
-                <!-- Man City -->
+            
                 <div class="card tarjeta-camisa" data-equipo="manchester city inglaterra">
                     <a href="producto.html?nombre=Camiseta%20Manchester%20City&precio=89.99&img=camisa-man-city.jpg" style="text-decoration: none; color: inherit;">
                         <div class="img-container">
@@ -81,7 +81,7 @@
                     <button class="btn-card" onclick="agregarAlCarrito('Camiseta Manchester City', 89.99, '../img/camisa-man-city.jpg')">Añadir rápido</button>
                 </div>
 
-                <!-- PSG -->
+   
                 <div class="card tarjeta-camisa" data-equipo="psg paris francia">
                     <a href="producto.html?nombre=Camiseta%20PSG&precio=99.99&img=camisa-psg.jpg" style="text-decoration: none; color: inherit;">
                         <div class="img-container">
@@ -93,7 +93,7 @@
                     <button class="btn-card" onclick="agregarAlCarrito('Camiseta PSG', 99.99, '../img/camisa-psg.jpg')">Añadir rápido</button>
                 </div>
 
-                <!-- Perú -->
+    
                 <div class="card tarjeta-camisa" data-equipo="peru seleccion">
                     <a href="producto.html?nombre=Camiseta%20Selección%20Peruana&precio=67.99&img=camisa-peru.jpg" style="text-decoration: none; color: inherit;">
                         <div class="img-container">
@@ -111,7 +111,7 @@
         </section>
     </main>
 
-    <!-- MODAL CARRITO -->
+
     <div id="modal-carrito" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -129,7 +129,7 @@
         </div>
     </div>
 
-    <!-- SCRIPT UNIVERSAL CARRITO (Con localStorage) -->
+  
     <script>
         let carrito = JSON.parse(localStorage.getItem('carritoGolyEstilo')) || [];
         document.addEventListener('DOMContentLoaded', actualizarCarrito);
