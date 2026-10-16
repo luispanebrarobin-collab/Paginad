@@ -22,7 +22,7 @@ body {
     line-height: 1.6;
 }
 
-/* HEADER Y NAV */
+
 .header-tienda {
     background-color: var(--primary-color);
     color: #ffffff;
@@ -67,7 +67,7 @@ body {
     box-shadow: 0 2px 8px rgba(225, 29, 72, 0.3);
 }
 
-/* SECCIÓN PRODUCTOS */
+
 .productos { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
 .titulo-seccion {
     font-size: 26px; font-weight: 800; margin-bottom: 25px;
