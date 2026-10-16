@@ -7,14 +7,14 @@
 }
 
 :root {
-    --primary-color: #111827;       /* Negro azabache */
-    --accent-color: #e11d48;        /* Rojo deportivo neón */
-    --accent-hover: #be123c;        /* Rojo hover */
-    --bg-main: #f8fafc;             /* Gris claro limpio */
-    --bg-card: #ffffff;             /* Blanco puro */
-    --text-main: #0f172a;           /* Texto oscuro */
-    --text-muted: #64748b;          /* Texto secundario */
-    --border-color: #e2e8f0;        /* Bordes ligeros */
+    --primary-color: #111827;       
+    --accent-color: #e11d48;        
+    --accent-hover: #be123c;        
+    --bg-main: #f8fafc;             
+    --bg-card: #ffffff;            
+    --text-main: #0f172a;           
+    --text-muted: #64748b;          
+    --border-color: #e2e8f0;        
     --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
     --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     --radius-md: 12px;
@@ -29,7 +29,7 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* HEADER & NAVEGACIÓN */
+
 .header-tienda {
     background-color: var(--primary-color);
     color: #ffffff;
@@ -92,7 +92,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* BOTONES GENERALES */
+
 .btn-primary {
     display: inline-block;
     background-color: var(--accent-color);
@@ -112,7 +112,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* HERO CON CARRUSEL */
+
 .hero {
     position: relative;
     height: 450px;
@@ -172,7 +172,7 @@ body {
     margin-bottom: 24px;
 }
 
-/* RECUADROS GIGANTES (BOTONES DEL CATÁLOGO) */
+
 .botones-catalogo {
     max-width: 1200px;
     margin: 60px auto;
@@ -245,7 +245,7 @@ body {
     transform: scale(1.05);
 }
 
-/* MODAL CARRITO */
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -405,7 +405,7 @@ body {
     margin-top: 40px;
 }
 
-/* MEDIA QUERIES */
+
 @media (max-width: 768px) {
     .header-tienda {
         flex-direction: column;
