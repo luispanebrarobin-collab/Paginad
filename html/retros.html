@@ -10,7 +10,7 @@
     <header class="header-tienda">
         <div class="logo-tienda"><h1>⚽ GOL & ESTILO</h1></div>
         <nav class="nav-tienda">
-            <a href="../lin.html" class="btn-nav">Inicio</a>
+            <a href="../index.html" class="btn-nav">Inicio</a>
             <a href="actuales.html" class="btn-nav">Actuales</a>
             <a href="retros.html" class="btn-nav activo">Retros</a>
             <a href="contactame.html" class="btn-nav">Contacto</a>
@@ -26,7 +26,7 @@
             
             <div class="grid-productos" id="grid-camisetas">
                 
-                <!-- Argentina -->
+
                 <div class="card tarjeta-camisa" data-equipo="argentina seleccion albiceleste maradona 1986">
                     <a href="producto.html?nombre=Camiseta%20Argentina%20Clásica&precio=75.00&img=camisa-argentina.jpg" style="text-decoration: none; color: inherit;">
                         <div class="img-container">
@@ -39,7 +39,7 @@
                     <button class="btn-card" onclick="agregarAlCarrito('Camiseta Argentina Clásica', 75.00, '../img/camisa-argentina.jpg')">Añadir rápido</button>
                 </div>
 
-                <!-- Brasil -->
+
                 <div class="card tarjeta-camisa" data-equipo="brasil seleccion verdeamarela 2002">
                     <a href="producto.html?nombre=Camiseta%20Brasil%20Pentacampeón&precio=79.99&img=camisa-brasil.jpg" style="text-decoration: none; color: inherit;">
                         <div class="img-container">
@@ -56,7 +56,7 @@
         </section>
     </main>
 
-    <!-- MODAL CARRITO -->
+
     <div id="modal-carrito" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -74,7 +74,7 @@
         </div>
     </div>
 
-    <!-- SCRIPT UNIVERSAL CARRITO (Con localStorage) -->
+
     <script>
         let carrito = JSON.parse(localStorage.getItem('carritoGolyEstilo')) || [];
         document.addEventListener('DOMContentLoaded', actualizarCarrito);
