@@ -21,7 +21,7 @@ body {
     line-height: 1.6;
 }
 
-/* HEADER Y NAV */
+
 .header-tienda {
     background-color: var(--primary-color); color: #ffffff; padding: 16px 5%;
     display: flex; justify-content: space-between; align-items: center;
@@ -43,7 +43,7 @@ body {
     padding: 8px 16px; border-radius: var(--radius-sm); cursor: pointer; font-weight: 600;
 }
 
-/* SECCIÓN PRODUCTOS */
+
 .productos { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
 .titulo-seccion {
     font-size: 26px; font-weight: 800; margin-bottom: 25px;
@@ -72,7 +72,7 @@ body {
     position: absolute; top: 10px; left: 10px; font-size: 11px; font-weight: 700;
     padding: 4px 10px; border-radius: 20px;
 }
-/* Estilo especial para los retros */
+
 .badge.retro { background-color: #eab308; color: #422006; }
 
 .card h4 { font-size: 17px; margin-bottom: 6px; }
@@ -84,7 +84,7 @@ body {
 }
 .btn-card:hover { background-color: var(--accent-color); }
 
-/* MODAL CARRITO */
+
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0,0,0,0.6); z-index: 2000; display: flex; justify-content: flex-end;
