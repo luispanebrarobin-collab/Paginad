@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contáctanos | Gol & Estilo</title>
+    <link rel="stylesheet" href="../estil/cont.css">
+    <link rel="stylesheet" href="../estil/lin.css">
+</head>
+<body>
+    <header class="header-tienda">
+        <div class="logo-tienda"><h1>⚽ GOL & ESTILO</h1></div>
+        <nav class="nav-tienda">
+            <a href="../lin.html" class="btn-nav">Inicio</a>
+            <a href="actuales.html" class="btn-nav">Actuales</a>
+            <a href="retros.html" class="btn-nav">Retros</a>
+            <a href="contactame.html" class="btn-nav activo">Contacto</a>
+        </nav>
+    </header>
+
+    <main class="main-contacto">
+        <div class="contacto-caja">
+            <h2>HABLEMOS DE FÚTBOL Y CAMISETAS 📩</h2>
+            <p>¿Dudas con tu pedido, envíos o buscas una camiseta retro difícil de conseguir? Escríbenos.</p>
+
+            <form class="form-contacto" onsubmit="enviarMensaje(event)">
+                <div class="input-group">
+                    <label>Nombre Completo</label>
+                    <input type="text" id="nombre" placeholder="Ej. Luis Enrique..." required>
+                </div>
+                <div class="input-group">
+                    <label>Correo o WhatsApp</label>
+                    <input type="text" placeholder="Tu medio de contacto" required>
+                </div>
+                <div class="input-group">
+                    <label>Mensaje</label>
+                    <textarea rows="5" placeholder="¿En qué podemos ayudarte?" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">ENVIAR MENSAJE</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        function enviarMensaje(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            alert(`¡Gracias ${nombre}! Hemos recibido tu mensaje y te contactaremos en breve.`);
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>

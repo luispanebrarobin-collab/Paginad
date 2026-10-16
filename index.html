@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gol & Estilo | Tienda de Camisetas de Fútbol</title>
+    <link rel="stylesheet" href="estil/lin.css">
+</head>
+<body>
+    <header class="header-tienda">
+        <div class="logo-tienda">
+            <h1>⚽ GOL & ESTILO</h1>
+        </div>
+        <nav class="nav-tienda">
+            <a href="lin.html" class="btn-nav activo">Inicio</a>
+            <a href="html/actuales.html" class="btn-nav">Actuales</a>
+            <a href="html/retros.html" class="btn-nav">Retros</a>
+            <a href="html/contactame.html" class="btn-nav">Contacto</a>
+        </nav>
+        <div class="header-carrito">
+            <button class="btn-carrito" onclick="abrirCarrito()">🛒 Carrito (<span id="cart-count">0</span>)</button>
+        </div>
+    </header>
+
+    <main class="main-contenido">
+<!-- HERO CON CARRUSEL AUTOMÁTICO -->
+        <section id="inicio" class="hero">
+            <div class="carrusel-fondo">
+                <div class="slide activo" style="background-image: url('img/fond.jpg');"></div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1560272564-c83b66b1ad12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1526232761682-d26e03ac148e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');"></div>
+            </div>
+            <div class="hero-overlay">
+                <h2>NUEVAS CAMISETAS 2026</h2>
+                <p>Las colecciones oficiales de tus equipos y selecciones favoritas con la mejor calidad.</p>
+            </div>
+        </section>
+        </section>
+        <!-- LOS DOS RECUADROS (BOTONES GIGANTES AL CATÁLOGO) -->
+        <section class="botones-catalogo">
+            <a href="html/actuales.html" class="recuadro-btn" style="background-image: url('img/camisa-real-madrid.jpg');">
+                <div class="recuadro-overlay">
+                    <h3>POLOS ACTUALES</h3>
+                    <span class="btn-falso">Explorar Temporada 2026</span>
+                </div>
+            </a>
+            <a href="html/retros.html" class="recuadro-btn" style="background-image: url('img/camisa-argentina.jpg');">
+                <div class="recuadro-overlay">
+                    <h3>POLOS RETROS</h3>
+                    <span class="btn-falso">Explorar Clásicos</span>
+                </div>
+            </a>
+        </section>
+    </main>
+
+    <!-- MODAL CARRITO -->
+    <div id="modal-carrito" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🛒 Tu Carrito de Compras</h2>
+                <button class="btn-cerrar" onclick="cerrarCarrito()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="carrito-lista"></div>
+                <div id="carrito-vacio" class="mensaje-vacio">
+                    <p>Tu carrito está vacío actualmente ⚽</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="resumen-total">
+                    <span>Total a pagar:</span>
+                    <strong id="carrito-total">$0.00 USD</strong>
+                </div>
+                <button class="btn-primary btn-checkout" onclick="procesarPago()">FINALIZAR COMPRA</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-tienda">
+        <p>&copy; 2026 Gol & Estilo - Tienda Oficial de Camisetas de Fútbol.</p>
+    </footer>
+
+    <!-- SCRIPT DE CARRUSEL Y CARRITO -->
+    <script>
+        // Carrusel automático del Hero
+        let slideActual = 0;
+        const slides = document.querySelectorAll('.carrusel-fondo .slide');
+        function cambiarSlide() {
+            if(slides.length > 0) {
+                slides[slideActual].classList.remove('activo');
+                slideActual = (slideActual + 1) % slides.length;
+                slides[slideActual].classList.add('activo');
+            }
+        }
+        if(slides.length > 0) { setInterval(cambiarSlide, 4000); }
+
+        // Lógica del carrito con localStorage
+        let carrito = JSON.parse(localStorage.getItem('carritoGolyEstilo')) || [];
+        document.addEventListener('DOMContentLoaded', actualizarCarrito);
+
+        function cambiarCantidad(index, cambio) {
+            carrito[index].cantidad += cambio;
+            if (carrito[index].cantidad <= 0) carrito.splice(index, 1);
+            actualizarCarrito();
+        }
+
+        function eliminarItem(index) {
+            carrito.splice(index, 1);
+            actualizarCarrito();
+        }
+
+        function actualizarCarrito() {
+            localStorage.setItem('carritoGolyEstilo', JSON.stringify(carrito));
+            const listaHTML = document.getElementById('carrito-lista');
+            const totalHTML = document.getElementById('carrito-total');
+            const contadorHTML = document.getElementById('cart-count');
+            const vacioHTML = document.getElementById('carrito-vacio');
+
+            if(!listaHTML) return;
+            listaHTML.innerHTML = '';
+            let total = 0;
+            let totalCantidad = 0;
+
+            if (carrito.length === 0) {
+                vacioHTML.style.display = 'block';
+            } else {
+                vacioHTML.style.display = 'none';
+                carrito.forEach((item, index) => {
+                    let subtotal = item.precio * item.cantidad;
+                    total += subtotal;
+                    totalCantidad += item.cantidad;
+
+                    listaHTML.innerHTML += `
+                        <div class="item-carrito">
+                            <img src="${item.imagen}" alt="${item.nombre}" class="img-carrito">
+                            <div class="info-item">
+                                <h5 style="font-size:12px;">${item.nombre}</h5>
+                                <p>$${item.precio.toFixed(2)} USD</p>
+                            </div>
+                            <div class="controles-cantidad">
+                                <button onclick="cambiarCantidad(${index}, -1)">-</button>
+                                <span>${item.cantidad}</span>
+                                <button onclick="cambiarCantidad(${index}, 1)">+</button>
+                            </div>
+                            <button class="btn-eliminar" onclick="eliminarItem(${index})">🗑</button>
+                        </div>
+                    `;
+                });
+            }
+
+            totalHTML.textContent = `$${total.toFixed(2)} USD`;
+            contadorHTML.textContent = totalCantidad;
+        }
+
+        function abrirCarrito() { document.getElementById('modal-carrito').classList.add('activo'); }
+        function cerrarCarrito() { document.getElementById('modal-carrito').classList.remove('activo'); }
+
+        function procesarPago() {
+            if (carrito.length === 0) {
+                alert('El carrito está vacío.');
+                return;
+            }
+            alert('🎉 ¡Gracias por tu compra en Gol & Estilo!');
+            carrito = [];
+            actualizarCarrito();
+            cerrarCarrito();
+        }
+    </script>
+</body>
+</html>

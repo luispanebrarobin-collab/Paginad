@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actuales | Gol & Estilo</title>
+    <link rel="stylesheet" href="../estil/len.css">
+</head>
+<body>
+    <header class="header-tienda">
+        <div class="logo-tienda"><h1>⚽ GOL & ESTILO</h1></div>
+        <nav class="nav-tienda">
+            <a href="../lin.html" class="btn-nav">Inicio</a>
+            <a href="actuales.html" class="btn-nav activo">Actuales</a>
+            <a href="retros.html" class="btn-nav">Retros</a>
+            <a href="contactame.html" class="btn-nav">Contacto</a>
+        </nav>
+        <div class="header-carrito">
+            <button class="btn-carrito" onclick="abrirCarrito()">🛒 Carrito (<span id="cart-count">0</span>)</button>
+        </div>
+    </header>
+
+    <main class="main-contenido">
+        <section class="productos" style="margin-top: 40px;">
+            <h3 class="titulo-seccion">Camisetas Temporada Actual</h3>
+            
+            <div class="contenedor-buscador" style="margin: 0 0 30px 0; padding: 0;">
+                <input type="text" id="input-buscar-camisa" onkeyup="filtrarCamisetas()" placeholder="🔍 Buscar equipo (ej. Barcelona, PSG)...">
+            </div>
+
+            <div class="grid-productos" id="grid-camisetas">
+                
+                <!-- Real Madrid -->
+                <div class="card tarjeta-camisa" data-equipo="real madrid espana">
+                    <!-- ENLACE A LA PÁGINA DE PRODUCTO -->
+                    <a href="producto.html?nombre=Camiseta%20Real%20Madrid&precio=89.99&img=camisa-real-madrid.jpg" style="text-decoration: none; color: inherit;">
+                        <div class="img-container">
+                            <img src="../img/camisa-real-madrid.jpg" alt="Real Madrid" class="img-producto">
+                            <span class="badge">NUEVO</span>
+                        </div>
+                        <h4>Camiseta Real Madrid</h4>
+                    </a>
+                    <!-- FIN DEL ENLACE -->
+                    <p class="precio">$89.99 USD</p>
+                    <button class="btn-card" onclick="agregarAlCarrito('Camiseta Real Madrid', 89.99, '../img/camisa-real-madrid.jpg')">Añadir rápido</button>
+                </div>
+
+                <!-- Barcelona -->
+                <div class="card tarjeta-camisa" data-equipo="barcelona barca espana">
+                    <a href="producto.html?nombre=Camiseta%20FC%20Barcelona&precio=89.99&img=camisa-barcelona.jpg" style="text-decoration: none; color: inherit;">
+                        <div class="img-container">
+                            <img src="../img/camisa-barcelona.jpg" alt="Barcelona" class="img-producto">
+                        </div>
+                        <h4>Camiseta FC Barcelona</h4>
+                    </a>
+                    <p class="precio">$89.99 USD</p>
+                    <button class="btn-card" onclick="agregarAlCarrito('Camiseta FC Barcelona', 89.99, '../img/camisa-barcelona.jpg')">Añadir rápido</button>
+                </div>
+
+                <!-- Bayern -->
+                <div class="card tarjeta-camisa" data-equipo="bayern munchen alemania">
+                    <a href="producto.html?nombre=Camiseta%20Bayern%20München&precio=84.99&img=camisa-bayern.jpg" style="text-decoration: none; color: inherit;">
+                        <div class="img-container">
+                            <img src="../img/camisa-bayern.jpg" alt="Bayern" class="img-producto">
+                        </div>
+                        <h4>Camiseta Bayern München</h4>
+                    </a>
+                    <p class="precio">$84.99 USD</p>
+                    <button class="btn-card" onclick="agregarAlCarrito('Camiseta Bayern München', 84.99, '../img/camisa-bayern.jpg')">Añadir rápido</button>
+                </div>
+
+                <!-- Man City -->
+                <div class="card tarjeta-camisa" data-equipo="manchester city inglaterra">
+                    <a href="producto.html?nombre=Camiseta%20Manchester%20City&precio=89.99&img=camisa-man-city.jpg" style="text-decoration: none; color: inherit;">
+                        <div class="img-container">
+                            <img src="../img/camisa-man-city.jpg" alt="Man City" class="img-producto">
+                        </div>
+                        <h4>Camiseta Manchester City</h4>
+                    </a>
+                    <p class="precio">$89.99 USD</p>
+                    <button class="btn-card" onclick="agregarAlCarrito('Camiseta Manchester City', 89.99, '../img/camisa-man-city.jpg')">Añadir rápido</button>
+                </div>
+
+                <!-- PSG -->
+                <div class="card tarjeta-camisa" data-equipo="psg paris francia">
+                    <a href="producto.html?nombre=Camiseta%20PSG&precio=99.99&img=camisa-psg.jpg" style="text-decoration: none; color: inherit;">
+                        <div class="img-container">
+                            <img src="../img/camisa-psg.jpg" alt="PSG" class="img-producto">
+                        </div>
+                        <h4>Camiseta PSG</h4>
+                    </a>
+                    <p class="precio">$99.99 USD</p>
+                    <button class="btn-card" onclick="agregarAlCarrito('Camiseta PSG', 99.99, '../img/camisa-psg.jpg')">Añadir rápido</button>
+                </div>
+
+                <!-- Perú -->
+                <div class="card tarjeta-camisa" data-equipo="peru seleccion">
+                    <a href="producto.html?nombre=Camiseta%20Selección%20Peruana&precio=67.99&img=camisa-peru.jpg" style="text-decoration: none; color: inherit;">
+                        <div class="img-container">
+                            <img src="../img/camisa-peru.jpg" alt="Perú" class="img-producto">
+                            <span class="badge oferta">-15%</span>
+                        </div>
+                        <h4>Camiseta Selección Peruana</h4>
+                    </a>
+                    <p class="precio"><span class="precio-anterior">$79.99</span> $67.99 USD</p>
+                    <button class="btn-card" onclick="agregarAlCarrito('Camiseta Selección Peruana', 67.99, '../img/camisa-peru.jpg')">Añadir rápido</button>
+                </div>
+
+            </div>
+            <p id="sin-resultados" class="mensaje-vacio" style="display: none;">No se encontraron camisetas ⚽</p>
+        </section>
+    </main>
+
+    <!-- MODAL CARRITO -->
+    <div id="modal-carrito" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🛒 Tu Carrito</h2>
+                <button class="btn-cerrar" onclick="cerrarCarrito()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="carrito-lista"></div>
+                <div id="carrito-vacio" class="mensaje-vacio"><p>Tu carrito está vacío ⚽</p></div>
+            </div>
+            <div class="modal-footer">
+                <div class="resumen-total"><span>Total:</span><strong id="carrito-total">$0.00 USD</strong></div>
+                <button class="btn-primary btn-checkout" onclick="procesarPago()">COMPRAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT UNIVERSAL CARRITO (Con localStorage) -->
+    <script>
+        let carrito = JSON.parse(localStorage.getItem('carritoGolyEstilo')) || [];
+        document.addEventListener('DOMContentLoaded', actualizarCarrito);
+
+        function filtrarCamisetas() {
+            let busqueda = document.getElementById('input-buscar-camisa').value.toLowerCase();
+            let tarjetas = document.querySelectorAll('.tarjeta-camisa');
+            let visibles = 0;
+            tarjetas.forEach(t => {
+                if (t.getAttribute('data-equipo').toLowerCase().includes(busqueda) || t.querySelector('h4').textContent.toLowerCase().includes(busqueda)) {
+                    t.style.display = "flex"; visibles++;
+                } else { t.style.display = "none"; }
+            });
+            document.getElementById('sin-resultados').style.display = (visibles === 0) ? "block" : "none";
+        }
+
+        function agregarAlCarrito(nombreItem, precioItem, imagenItem) {
+            let item = carrito.find(i => i.nombre === nombreItem);
+            if (item) item.cantidad++; else carrito.push({ nombre: nombreItem, precio: precioItem, imagen: imagenItem, cantidad: 1 });
+            actualizarCarrito(); abrirCarrito();
+        }
+        function cambiarCantidad(index, cambio) {
+            carrito[index].cantidad += cambio;
+            if (carrito[index].cantidad <= 0) carrito.splice(index, 1);
+            actualizarCarrito();
+        }
+        function eliminarItem(index) { carrito.splice(index, 1); actualizarCarrito(); }
+        
+        function actualizarCarrito() {
+            localStorage.setItem('carritoGolyEstilo', JSON.stringify(carrito));
+            const lista = document.getElementById('carrito-lista');
+            let total = 0, totalCant = 0;
+            if(!lista) return; 
+            lista.innerHTML = '';
+
+            if (carrito.length === 0) {
+                document.getElementById('carrito-vacio').style.display = 'block';
+            } else {
+                document.getElementById('carrito-vacio').style.display = 'none';
+                carrito.forEach((item, i) => {
+                    total += item.precio * item.cantidad; totalCant += item.cantidad;
+                    lista.innerHTML += `
+                        <div class="item-carrito">
+                            <img src="${item.imagen}" class="img-carrito">
+                            <div class="info-item"><h5>${item.nombre}</h5><p>$${item.precio.toFixed(2)}</p></div>
+                            <div class="controles-cantidad">
+                                <button onclick="cambiarCantidad(${i}, -1)">-</button><span>${item.cantidad}</span><button onclick="cambiarCantidad(${i}, 1)">+</button>
+                            </div>
+                            <button class="btn-eliminar" onclick="eliminarItem(${i})">🗑</button>
+                        </div>`;
+                });
+            }
+            document.getElementById('carrito-total').textContent = `$${total.toFixed(2)} USD`;
+            document.getElementById('cart-count').textContent = totalCant;
+        }
+        function abrirCarrito() { document.getElementById('modal-carrito').classList.add('activo'); }
+        function cerrarCarrito() { document.getElementById('modal-carrito').classList.remove('activo'); }
+        function procesarPago() { 
+            if(carrito.length > 0){
+                alert('¡Gracias por tu compra!'); carrito = []; actualizarCarrito(); cerrarCarrito();
+            } 
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Producto | Gol & Estilo</title>
+    <!-- Cargamos ambos CSS para mantener la consistencia -->
+    <link rel="stylesheet" href="../estil/lin.css">
+    <link rel="stylesheet" href="../estil/prod.css">
+</head>
+<body>
+    <header class="header-tienda">
+        <div class="logo-tienda"><h1>⚽ GOL & ESTILO</h1></div>
+        <nav class="nav-tienda">
+            <a href="../lin.html" class="btn-nav">Inicio</a>
+            <a href="actuales.html" class="btn-nav">Actuales</a>
+            <a href="retros.html" class="btn-nav">Retros</a>
+            <a href="contactame.html" class="btn-nav">Contacto</a>
+        </nav>
+        <div class="header-carrito">
+            <button class="btn-carrito" onclick="abrirCarrito()">🛒 Carrito (<span id="cart-count">0</span>)</button>
+        </div>
+    </header>
+
+    <main class="main-producto">
+        <div class="producto-container">
+            <div class="producto-imagen">
+                <img id="detalle-img" src="" alt="Camiseta">
+            </div>
+            <div class="producto-info">
+                <h2 id="detalle-nombre">Cargando...</h2>
+                <p class="precio-destacado" id="detalle-precio">$0.00 USD</p>
+                <p class="descripcion">Camiseta oficial con tecnología de alta gama para máxima transpirabilidad en la cancha. Escudo bordado y detalles premium.</p>
+                
+                <div class="opciones-compra">
+                    <label for="select-talla">Selecciona tu talla:</label>
+                    <select id="select-talla" onchange="actualizarPrecio()">
+                        <option value="S" data-extra="0">Talla S</option>
+                        <option value="M" data-extra="0">Talla M</option>
+                        <option value="L" data-extra="5">Talla L (+$5.00)</option>
+                        <option value="XL" data-extra="10">Talla XL (+$10.00)</option>
+                    </select>
+
+                    <div class="personalizacion-box">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="check-personalizar" onchange="togglePersonalizacion()">
+                            Personalizar con Nombre y Número (+$15.00)
+                        </label>
+                        
+                        <div id="campos-personalizacion" style="display: none;">
+                            <div class="campos-grid">
+                                <div class="input-grupo-pers">
+                                    <label>Nombre en la espalda (Máx 10 letras)</label>
+                                    <input type="text" id="pers-nombre" maxlength="10" placeholder="Ej. MESSI" onkeyup="actualizarPreview()">
+                                </div>
+                                <div class="input-grupo-pers">
+                                    <label>Número (0-99)</label>
+                                    <input type="number" id="pers-numero" min="0" max="99" placeholder="Ej. 10" onkeyup="actualizarPreview()" onchange="actualizarPreview()">
+                                </div>
+                            </div>
+                            
+                            <div class="vista-previa-titulo">Vista Previa del Estampado:</div>
+                            <div class="dorsal-preview">
+                                <div class="dorsal-nombre" id="preview-nombre">NOMBRE</div>
+                                <div class="dorsal-numero" id="preview-numero">00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-primary btn-add-cart" onclick="agregarDesdeDetalle()">AÑADIR AL CARRITO</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL CARRITO -->
+    <div id="modal-carrito" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🛒 Tu Carrito</h2>
+                <button class="btn-cerrar" onclick="cerrarCarrito()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="carrito-lista"></div>
+                <div id="carrito-vacio" class="mensaje-vacio"><p>Tu carrito está vacío ⚽</p></div>
+            </div>
+            <div class="modal-footer">
+                <div class="resumen-total"><span>Total:</span><strong id="carrito-total">$0.00 USD</strong></div>
+                <button class="btn-primary btn-checkout" onclick="procesarPago()">COMPRAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT DE PRODUCTO Y CARRITO -->
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const nombre = urlParams.get('nombre');
+        const precioBase = parseFloat(urlParams.get('precio'));
+        const imgParams = urlParams.get('img');
+
+        let precioActual = precioBase;
+        const costoPersonalizacion = 15.00;
+
+        if(nombre && precioBase && imgParams) {
+            document.getElementById('detalle-nombre').textContent = nombre;
+            document.getElementById('detalle-img').src = '../img/' + imgParams;
+            document.getElementById('detalle-precio').textContent = '$' + precioBase.toFixed(2) + ' USD';
+        } else {
+            document.getElementById('detalle-nombre').textContent = 'Producto no encontrado';
+        }
+
+        function togglePersonalizacion() {
+            const check = document.getElementById('check-personalizar');
+            const campos = document.getElementById('campos-personalizacion');
+            campos.style.display = check.checked ? 'block' : 'none';
+            actualizarPrecio();
+        }
+
+        function actualizarPreview() {
+            let nom = document.getElementById('pers-nombre').value.toUpperCase();
+            let num = document.getElementById('pers-numero').value;
+            document.getElementById('preview-nombre').textContent = nom ? nom : 'NOMBRE';
+            document.getElementById('preview-numero').textContent = num ? num : '00';
+        }
+
+        function actualizarPrecio() {
+            const select = document.getElementById('select-talla');
+            const check = document.getElementById('check-personalizar');
+            const costoExtraTalla = parseFloat(select.options[select.selectedIndex].getAttribute('data-extra'));
+            const extraPers = check.checked ? costoPersonalizacion : 0;
+
+            precioActual = precioBase + costoExtraTalla + extraPers;
+            document.getElementById('detalle-precio').textContent = '$' + precioActual.toFixed(2) + ' USD';
+        }
+
+        function agregarDesdeDetalle() {
+            if(!nombre) return; 
+            const talla = document.getElementById('select-talla').value;
+            const check = document.getElementById('check-personalizar');
+            
+            let nombreFinal = `${nombre} (Talla ${talla})`;
+
+            if (check.checked) {
+                let nomPers = document.getElementById('pers-nombre').value.toUpperCase() || 'SIN NOMBRE';
+                let numPers = document.getElementById('pers-numero').value || '0';
+                nombreFinal += ` | Dorsal: ${nomPers} #${numPers}`;
+            }
+            
+            agregarAlCarrito(nombreFinal, precioActual, '../img/' + imgParams);
+        }
+
+        let carrito = JSON.parse(localStorage.getItem('carritoGolyEstilo')) || [];
+        document.addEventListener('DOMContentLoaded', actualizarCarrito);
+
+        function agregarAlCarrito(nombreItem, precioItem, imagenItem) {
+            let item = carrito.find(i => i.nombre === nombreItem);
+            if (item) item.cantidad++; 
+            else carrito.push({ nombre: nombreItem, precio: precioItem, imagen: imagenItem, cantidad: 1 });
+            actualizarCarrito(); 
+            abrirCarrito();
+        }
+
+        function cambiarCantidad(index, cambio) {
+            carrito[index].cantidad += cambio;
+            if (carrito[index].cantidad <= 0) carrito.splice(index, 1);
+            actualizarCarrito();
+        }
+
+        function eliminarItem(index) { 
+            carrito.splice(index, 1); 
+            actualizarCarrito(); 
+        }
+
+        function actualizarCarrito() {
+            localStorage.setItem('carritoGolyEstilo', JSON.stringify(carrito));
+            const lista = document.getElementById('carrito-lista');
+            let total = 0, totalCant = 0;
+            
+            if(!lista) return; 
+            lista.innerHTML = '';
+
+            if (carrito.length === 0) {
+                document.getElementById('carrito-vacio').style.display = 'block';
+            } else {
+                document.getElementById('carrito-vacio').style.display = 'none';
+                carrito.forEach((item, i) => {
+                    total += item.precio * item.cantidad; 
+                    totalCant += item.cantidad;
+                    lista.innerHTML += `
+                        <div class="item-carrito">
+                            <img src="${item.imagen}" class="img-carrito">
+                            <div class="info-item">
+                                <h5 style="font-size:12px;">${item.nombre}</h5>
+                                <p>$${item.precio.toFixed(2)}</p>
+                            </div>
+                            <div class="controles-cantidad">
+                                <button onclick="cambiarCantidad(${i}, -1)">-</button>
+                                <span>${item.cantidad}</span>
+                                <button onclick="cambiarCantidad(${i}, 1)">+</button>
+                            </div>
+                            <button class="btn-eliminar" onclick="eliminarItem(${i})">🗑</button>
+                        </div>`;
+                });
+            }
+            const totalEl = document.getElementById('carrito-total');
+            if(totalEl) totalEl.textContent = `$${total.toFixed(2)} USD`;
+            const countEl = document.getElementById('cart-count');
+            if(countEl) countEl.textContent = totalCant;
+        }
+
+        function abrirCarrito() { document.getElementById('modal-carrito').classList.add('activo'); }
+        function cerrarCarrito() { document.getElementById('modal-carrito').classList.remove('activo'); }
+        function procesarPago() { 
+            if(carrito.length > 0){
+                alert('¡Gracias por tu compra!'); carrito = []; actualizarCarrito(); cerrarCarrito();
+            } else { alert('Tu carrito está vacío.'); }
+        }
+    </script>
+</body>
+</html>

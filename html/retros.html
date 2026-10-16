@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retros | Gol & Estilo</title>
+    <link rel="stylesheet" href="../estil/lan.css">
+</head>
+<body>
+    <header class="header-tienda">
+        <div class="logo-tienda"><h1>⚽ GOL & ESTILO</h1></div>
+        <nav class="nav-tienda">
+            <a href="../lin.html" class="btn-nav">Inicio</a>
+            <a href="actuales.html" class="btn-nav">Actuales</a>
+            <a href="retros.html" class="btn-nav activo">Retros</a>
+            <a href="contactame.html" class="btn-nav">Contacto</a>
+        </nav>
+        <div class="header-carrito">
+            <button class="btn-carrito" onclick="abrirCarrito()">🛒 Carrito (<span id="cart-count">0</span>)</button>
+        </div>
+    </header>
+
+    <main class="main-contenido">
+        <section class="productos" style="margin-top: 40px;">
+            <h3 class="titulo-seccion">Colección Clásica</h3>
+            
+            <div class="grid-productos" id="grid-camisetas">
+                
+                <!-- Argentina -->
+                <div class="card tarjeta-camisa" data-equipo="argentina seleccion albiceleste maradona 1986">
+                    <a href="producto.html?nombre=Camiseta%20Argentina%20Clásica&precio=75.00&img=camisa-argentina.jpg" style="text-decoration: none; color: inherit;">
+                        <div class="img-container">
+                            <img src="../img/camisa-argentina.jpg" alt="Argentina" class="img-producto">
+                            <span class="badge retro">RETRO</span>
+                        </div>
+                        <h4>Camiseta Argentina Clásica</h4>
+                    </a>
+                    <p class="precio">$75.00 USD</p>
+                    <button class="btn-card" onclick="agregarAlCarrito('Camiseta Argentina Clásica', 75.00, '../img/camisa-argentina.jpg')">Añadir rápido</button>
+                </div>
+
+                <!-- Brasil -->
+                <div class="card tarjeta-camisa" data-equipo="brasil seleccion verdeamarela 2002">
+                    <a href="producto.html?nombre=Camiseta%20Brasil%20Pentacampeón&precio=79.99&img=camisa-brasil.jpg" style="text-decoration: none; color: inherit;">
+                        <div class="img-container">
+                            <img src="../img/camisa-brasil.jpg" alt="Brasil" class="img-producto">
+                            <span class="badge retro">RETRO</span>
+                        </div>
+                        <h4>Camiseta Brasil Pentacampeón</h4>
+                    </a>
+                    <p class="precio">$79.99 USD</p>
+                    <button class="btn-card" onclick="agregarAlCarrito('Camiseta Brasil Pentacampeón', 79.99, '../img/camisa-brasil.jpg')">Añadir rápido</button>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL CARRITO -->
+    <div id="modal-carrito" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🛒 Tu Carrito</h2>
+                <button class="btn-cerrar" onclick="cerrarCarrito()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="carrito-lista"></div>
+                <div id="carrito-vacio" class="mensaje-vacio"><p>Tu carrito está vacío ⚽</p></div>
+            </div>
+            <div class="modal-footer">
+                <div class="resumen-total"><span>Total:</span><strong id="carrito-total">$0.00 USD</strong></div>
+                <button class="btn-primary btn-checkout" onclick="procesarPago()">COMPRAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT UNIVERSAL CARRITO (Con localStorage) -->
+    <script>
+        let carrito = JSON.parse(localStorage.getItem('carritoGolyEstilo')) || [];
+        document.addEventListener('DOMContentLoaded', actualizarCarrito);
+
+        function agregarAlCarrito(nombreItem, precioItem, imagenItem) {
+            let item = carrito.find(i => i.nombre === nombreItem);
+            if (item) item.cantidad++; else carrito.push({ nombre: nombreItem, precio: precioItem, imagen: imagenItem, cantidad: 1 });
+            actualizarCarrito(); abrirCarrito();
+        }
+        function cambiarCantidad(index, cambio) {
+            carrito[index].cantidad += cambio;
+            if (carrito[index].cantidad <= 0) carrito.splice(index, 1);
+            actualizarCarrito();
+        }
+        function eliminarItem(index) { carrito.splice(index, 1); actualizarCarrito(); }
+        
+        function actualizarCarrito() {
+            localStorage.setItem('carritoGolyEstilo', JSON.stringify(carrito));
+            const lista = document.getElementById('carrito-lista');
+            let total = 0, totalCant = 0;
+            if(!lista) return; 
+            lista.innerHTML = '';
+
+            if (carrito.length === 0) {
+                document.getElementById('carrito-vacio').style.display = 'block';
+            } else {
+                document.getElementById('carrito-vacio').style.display = 'none';
+                carrito.forEach((item, i) => {
+                    total += item.precio * item.cantidad; totalCant += item.cantidad;
+                    lista.innerHTML += `
+                        <div class="item-carrito">
+                            <img src="${item.imagen}" class="img-carrito">
+                            <div class="info-item"><h5>${item.nombre}</h5><p>$${item.precio.toFixed(2)}</p></div>
+                            <div class="controles-cantidad">
+                                <button onclick="cambiarCantidad(${i}, -1)">-</button><span>${item.cantidad}</span><button onclick="cambiarCantidad(${i}, 1)">+</button>
+                            </div>
+                            <button class="btn-eliminar" onclick="eliminarItem(${i})">🗑</button>
+                        </div>`;
+                });
+            }
+            document.getElementById('carrito-total').textContent = `$${total.toFixed(2)} USD`;
+            document.getElementById('cart-count').textContent = totalCant;
+        }
+        function abrirCarrito() { document.getElementById('modal-carrito').classList.add('activo'); }
+        function cerrarCarrito() { document.getElementById('modal-carrito').classList.remove('activo'); }
+        function procesarPago() { 
+            if(carrito.length > 0){
+                alert('¡Gracias por tu compra!'); carrito = []; actualizarCarrito(); cerrarCarrito();
+            } 
+        }
+    </script>
+</body>
+</html>
