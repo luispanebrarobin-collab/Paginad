@@ -23,7 +23,6 @@
     </header>
 
     <main class="main-contenido">
-<!-- HERO CON CARRUSEL AUTOMÁTICO -->
         <section id="inicio" class="hero">
             <div class="carrusel-fondo">
                 <div class="slide activo" style="background-image: url('img/fond.jpg');"></div>
@@ -36,7 +35,6 @@
             </div>
         </section>
         </section>
-        <!-- LOS DOS RECUADROS (BOTONES GIGANTES AL CATÁLOGO) -->
         <section class="botones-catalogo">
             <a href="html/actuales.html" class="recuadro-btn" style="background-image: url('img/camisa-real-madrid.jpg');">
                 <div class="recuadro-overlay">
@@ -53,7 +51,6 @@
         </section>
     </main>
 
-    <!-- MODAL CARRITO -->
     <div id="modal-carrito" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -80,9 +77,9 @@
         <p>&copy; 2026 Gol & Estilo - Tienda Oficial de Camisetas de Fútbol.</p>
     </footer>
 
-    <!-- SCRIPT DE CARRUSEL Y CARRITO -->
+
     <script>
-        // Carrusel automático del Hero
+
         let slideActual = 0;
         const slides = document.querySelectorAll('.carrusel-fondo .slide');
         function cambiarSlide() {
@@ -94,7 +91,7 @@
         }
         if(slides.length > 0) { setInterval(cambiarSlide, 4000); }
 
-        // Lógica del carrito con localStorage
+
         let carrito = JSON.parse(localStorage.getItem('carritoGolyEstilo')) || [];
         document.addEventListener('DOMContentLoaded', actualizarCarrito);
 
